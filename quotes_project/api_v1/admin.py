@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from api_v1.models import Quote, Rating
+
+admin.site.register(Quote)
+admin.site.register(Rating)
