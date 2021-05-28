@@ -5,12 +5,12 @@ CHOICES = (("Moderated", "Модерированная"),
 )
 
 
-class Quote:
+class Quote(models.Model):
     text = models.TextField(max_length=3000, null=False, blank=False, verbose_name='Текст')
     author = models.CharField(max_length=200, null=False, blank=False, verbose_name='Автор')
     email = models.EmailField(null=False, blank=False, verbose_name="Email")
-    rating = models.IntegerField(null=False, blank=False, verbose_name="Общий рейтинг")
-    status = models.CharField(choices=CHOICES, verbose_name='Статус')
+    rating = models.IntegerField(verbose_name="Общий рейтинг")
+    status = models.CharField(max_length=200, choices=CHOICES, verbose_name='Статус')
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -18,12 +18,16 @@ class Quote:
         verbose_name = 'Цитата'
         verbose_name_plural = 'Цитаты'
 
-    def __str__(self):
-        return self.text
 
-
-class Rating:
-    quote = models.ForeignKey(Quote, on_delete="CASCADE")
+class Rating(models.Model):
+    quote = models.ForeignKey(
+           'api_v1.Quote',
+           on_delete=models.CASCADE,
+           related_name='ratings',
+           verbose_name='Цитата',
+           null=False,
+           blank=False
+    )
     rating = models.IntegerField(null=False, blank=False, verbose_name="Рейтинг")
 
     class Meta:
@@ -31,6 +35,4 @@ class Rating:
         verbose_name = 'Рейтинг'
         verbose_name_plural = 'Рейтинги'
 
-    def __str__(self):
-        return self.rating
 
