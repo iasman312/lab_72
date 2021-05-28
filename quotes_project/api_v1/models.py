@@ -17,6 +17,7 @@ class Quote(models.Model):
         db_table = 'quotes'
         verbose_name = 'Цитата'
         verbose_name_plural = 'Цитаты'
+        permissions = [('view_all', 'View all')]
 
 
 class Rating(models.Model):
