@@ -9,8 +9,8 @@ class Quote(models.Model):
     text = models.TextField(max_length=3000, null=False, blank=False, verbose_name='Текст')
     author = models.CharField(max_length=200, null=False, blank=False, verbose_name='Автор')
     email = models.EmailField(null=False, blank=False, verbose_name="Email")
-    rating = models.IntegerField(verbose_name="Общий рейтинг")
-    status = models.CharField(max_length=200, choices=CHOICES, verbose_name='Статус')
+    rating = models.IntegerField(verbose_name="Общий рейтинг", default=0)
+    status = models.CharField(max_length=200, choices=CHOICES, verbose_name='Статус', default="New")
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

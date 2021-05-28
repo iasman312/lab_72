@@ -1,19 +1,16 @@
 from django.urls import include, path
 
-from rest_framework import routers
+from api_v1.views import QuoteView, QuoteDetailView
 
-from api_v1 import views
+app_name = 'api_v1'
 
-# router = routers.DefaultRouter()
-#
-# router.register(r'products', views.ProductViewSet)
-#
-# app_name = 'api_v2'
+article_urls = [
+    path('', QuoteView.as_view(), name='articles'),
+    path('<int:pk>/', QuoteDetailView.as_view(), name='article')
+]
 
 urlpatterns = [
-
-    # path('', include(router.urls)),
-
+    path('quotes/', include(article_urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
-
 ]
+
