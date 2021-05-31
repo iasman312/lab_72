@@ -3,10 +3,6 @@ from rest_framework.permissions import BasePermission
 
 class HasPermission(BasePermission):
 
-    def has_permission(self, request, view):
-        print('fdfdf')
-        return True
-
     def has_object_permission(self, request, view, obj):
         if request.method == "GET" and obj:
             if obj.status == 'Moderated':

@@ -30,6 +30,7 @@ class Rating(models.Model):
            blank=False
     )
     rating = models.IntegerField(null=False, blank=False, verbose_name="Рейтинг")
+    session = models.CharField(max_length=200, verbose_name="Сессия", blank=True, null=True)
 
     class Meta:
         db_table = 'ratings'

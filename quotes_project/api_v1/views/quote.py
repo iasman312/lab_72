@@ -28,6 +28,7 @@ class QuoteView(APIView):
 
 
 class QuoteDetailView(APIView):
+    permission_classes = [HasPermission]
 
     def get(self, request, pk, *args, **kwargs):
         quote = Quote.objects.get(pk=pk)
@@ -54,5 +55,5 @@ class QuoteDetailView(APIView):
 
 class RatingView(APIView):
     def post(self, request, *args, **kwargs):
-        pass
+        request.session['rating'] = 0
 
